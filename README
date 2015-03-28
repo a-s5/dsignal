@@ -1,0 +1,9 @@
+Reimplementacija Matlab kode za laboratorijske
+vaje pri predmetu Digitalna obdelava signalov.
+
+Namen reimplementacije je boljse razumevanje
+snovi, Matlab kode in izdelava odprto kodne
+moznosti proucevanja snovi.
+
+Za delovanje kode sta potreban paketa Numpy
+in Matplotlib.
