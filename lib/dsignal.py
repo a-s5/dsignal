@@ -10,6 +10,12 @@ def unitStep(M, N):
     return np.concatenate( (np.ones(M), np.zeros(N-M)) )
 
 
+def sawStep(M, N):
+    """ Zagast pulz sirine M s periodo N
+    """
+    return np.concatenate( (np.linspace(0,1,M), np.zeros(N-M)) )
+
+
 def sinewave(N, n, phi=0):
     """ Sinus s periodo N zamaknjen za kot phi na intervalu n
     """
@@ -126,3 +132,12 @@ def IDFT(X):
     W = np.exp( 1j*(2*np.pi/N) * ((n*k).T*k) )
 
     return np.dot(W,X)
+
+
+def phase(X):
+    """ Fazni spekter spektra X
+    """
+    Xtmp = np.round(X*10**9)/10**9
+    phi = np.angle(Xtmp)
+    phi[np.logical_and(Xtmp.imag == 0, Xtmp.real == 0)] = np.NaN
+    return phi
