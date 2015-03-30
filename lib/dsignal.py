@@ -22,6 +22,25 @@ def sinewave(N, n, phi=0):
     t = np.arange(n)
     return np.sin(2*np.pi*t/N + phi)
 
+
+def chain(signal, periods, M, N):
+    """ Zlepi vec period signala
+    """
+    x = np.array([])
+    for i in range(periods):
+        x = np.concatenate( (x, signal(M,N)) )
+    return x
+
+
+def delay(signal, n, cycle=True):
+    """ Zakasni signal za n vzorec. Ce je cycle=True, zakasni cikicno
+    """
+    if cycle:
+        return np.concatenate(( signal[n:], signal[0:n]))
+    else:
+        return np.concatenate(( np.zeros(n), signal[n:]))
+
+
 ##################################################
 
 
@@ -132,6 +151,17 @@ def IDFT(X):
     W = np.exp( 1j*(2*np.pi/N) * ((n*k).T*k) )
 
     return np.dot(W,X)
+
+
+def baseW(N, inverse=False):
+    """ Vrni matriko baznih vektorjev DFT oz. IDFT
+    """
+    k = np.arange(N)
+    n = np.ones( (N,N) )
+    if inverse:
+        return np.exp( 1j*(2*np.pi/N) * ((n*k).T*k) )
+    else:
+        return np.exp( -1j*(2*np.pi/N) * ((n*k).T*k) )
 
 
 def phase(X):
